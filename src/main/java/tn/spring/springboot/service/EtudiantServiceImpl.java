@@ -21,31 +21,33 @@ public class EtudiantServiceImpl implements EtudiantService {
     }
     @Override
     public List<Etudiant> fetchAllEtudiant(){
-        List<Etudiant> allEtudiants = etudiantRepository.findAll();
-        return allEtudiants;
+        return etudiantRepository.findAll();
     }
 
     @Override
     public Etudiant getEtudiantById(Long id) {
         Optional<Etudiant> employee = etudiantRepository.findById(id);
-        if (employee.isPresent()) {
-            return employee.get();
-        }
-        return null;
+        return employee.orElse(null);
     }
 
     @Override
-    public Etudiant updateEtudiantById(Long id, Etudiant etudiant) {
-        Optional<Etudiant> employee1 = etudiantRepository.findById(id);
+    public Etudiant updateEtudiantById(Long id, Etudiant newEtudiant) {
+        Optional<Etudiant> etudiant = etudiantRepository.findById(id);
 
-        if (employee1.isPresent()) {
-            Etudiant originalEtudiant = employee1.get();
+        if (etudiant.isPresent()) {
+            Etudiant originalEtudiant = etudiant.get();
 
-            if (Objects.nonNull(etudiant.getEtudiantName()) && !"".equalsIgnoreCase(etudiant.getEtudiantName())) {
-                originalEtudiant.setEtudiantName(etudiant.getEtudiantName());
+            if (Objects.nonNull(newEtudiant.getPersonne().getNom()) && !"".equalsIgnoreCase(newEtudiant.getPersonne().getNom())) {
+                originalEtudiant.getPersonne().setNom(newEtudiant.getPersonne().getNom());
             }
-            if (Objects.nonNull(etudiant.getEtudiantSalary()) && etudiant.getEtudiantSalary() != 0) {
-                originalEtudiant.setEtudiantSalary(etudiant.getEtudiantSalary());
+            if (Objects.nonNull(newEtudiant.getPersonne().getPrenom()) && !"".equalsIgnoreCase(newEtudiant.getPersonne().getPrenom())) {
+                originalEtudiant.getPersonne().setPrenom(newEtudiant.getPersonne().getPrenom());
+            }
+            if (Objects.nonNull(newEtudiant.getPersonne().getDateNaissance()) && !"".equalsIgnoreCase(newEtudiant.getPersonne().getDateNaissance())) {
+                originalEtudiant.getPersonne().setDateNaissance(newEtudiant.getPersonne().getDateNaissance());
+            }
+            if (newEtudiant.getMoyenne() != 0) {
+                originalEtudiant.setMoyenne(newEtudiant.getMoyenne());
             }
             return etudiantRepository.save(originalEtudiant);
         }
@@ -53,10 +55,10 @@ public class EtudiantServiceImpl implements EtudiantService {
     }
 
     @Override
-    public String deleteDepartmentById(Long id) {
+    public String deleteEtudiantById(Long id) {
         if (etudiantRepository.findById(id).isPresent()) {
             etudiantRepository.deleteById(id);
-            return "Employee deleted successfully";
+            return "Etudiant deleted successfully";
         }
         return "No such employee in the database";
     }

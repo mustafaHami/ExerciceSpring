@@ -11,7 +11,7 @@ public interface EtudiantService {
 
     Etudiant getEtudiantById(Long id);
 
-    Etudiant updateEtudiantById(Long id, Etudiant etudiant);
+    Etudiant updateEtudiantById(Long id, Etudiant newEtudiant);
 
-    String deleteDepartmentById(Long id);
+    String deleteEtudiantById(Long id);
 }

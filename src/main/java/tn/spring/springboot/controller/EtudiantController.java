@@ -29,12 +29,12 @@ public class EtudiantController {
     }
 
     @PutMapping("/etudiant/{id}")
-    public Etudiant updateEtudiant(@PathVariable("id") Long id, @RequestBody Etudiant etudiant) {
-        return etudiantService.updateEtudiantById(id, etudiant);
+    public Etudiant updateEtudiant(@PathVariable("id") Long id, Etudiant newEtudiant) {
+        return etudiantService.updateEtudiantById(id, newEtudiant);
     }
 
     @DeleteMapping("/etudiant/{id}")
     public String deleteEtudiant(@PathVariable("id") Long id) {
-        return etudiantService.deleteDepartmentById(id);
+        return etudiantService.deleteEtudiantById(id);
     }
 }
