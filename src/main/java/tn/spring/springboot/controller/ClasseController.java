@@ -1,6 +1,7 @@
 package tn.spring.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import tn.spring.springboot.entity.Classe;
 import tn.spring.springboot.entity.Etudiant;
@@ -9,10 +10,17 @@ import tn.spring.springboot.service.ClasseService;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class ClasseController {
     @Autowired
     private ClasseService classeService;
+
+    @PostMapping("/classe/ajouter")
+    public String ajouterClasse(@ModelAttribute Classe classe) {
+        classeService.saveClasse(classe);
+        return "redirect:/";
+    }
+
 
     @PostMapping("/classe")
     public Classe saveClasse(@RequestBody Classe classe) {

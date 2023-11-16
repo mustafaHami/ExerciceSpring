@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion CRUD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Section Classes -->
+    <div class="section">
+        <h2>Classes</h2>
+        <form action="/classe/ajouter" method="post">
+            <!-- Les champs du formulaire pour un étudiant -->
+            <input type="text" name="nom" placeholder="Nom">
+            <!-- Ajoutez d'autres champs selon votre entité Etudiant -->
+            <button type="submit">Ajouter Classe</button>
+        </form>
+    </div>
+    <!-- Section Professeurs -->
+    <div class="section">
+        <h2>Professeurs</h2>
+        <form action="/professeur/ajouter" method="post">
+            <input type="text" name="personne.nom" placeholder="Nom">
+            <input type="text" name="personne.prenom" placeholder="Prénom">
+            <input type="text" name="personne.dateNaissance" placeholder="dateNaissance">
+            <input type="text" name="matiere" placeholder="matiere">
+            <select name="classeId">
+                <option th:each="classe : ${classes}" th:value="${classe.classeId}">[[${classe.nom}]]</option>
+            </select>
+            <button type="submit">Ajouter Professeur</button>
+        </form>
+    </div>
+    <!-- Section Étudiants -->
+    <div class="section">
+        <h2>Étudiants</h2>
+        <form action="/etudiant/ajouter" method="post">
+            <input type="text" name="personne.nom" placeholder="Nom">
+            <input type="text" name="personne.prenom" placeholder="Prénom">
+            <input type="text" name="personne.dateNaissance" placeholder="dateNaissance">
+            <input type="text" name="moyenne" placeholder="moyenne">
+            <select name="classeId">
+                <option th:each="classe : ${classes}" th:value="${classe.classeId}">[[${classe.nom}]]</option>
+            </select>
+            <button type="submit">Ajouter Etudiant</button>
+        </form>
+    </div>
+    <h2>Liste des Classes</h2>
+    <table>
+        <tr th:each="classe : ${classes}">
+            <td style="text-align: left; !important;" th:text="${classe.nom}">Nom de la classe</td>
+        </tr>
+    </table>
+    <h2>Liste des Professeurs</h2>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Matière</th>
+            <th>Classe</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr th:each="professeur : ${professeurs}">
+            <td th:text="${professeur.personne.nom}">Nom du professeur</td>
+            <td th:text="${professeur.personne.prenom}">Prénom du professeur</td>
+            <td th:text="${professeur.personne.dateNaissance}">Date de naissance du professeur</td>
+            <td th:text="${professeur.matiere}">Matière du professeur</td>
+            <td th:text="${professeur.classe.nom}">Classe du professeur</td>
+            <td>
+                <form th:action="@{'/professeur/supprimer/' + ${professeur.profId}}" method="post">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <h2>Liste des Etudiants</h2>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Moyenne</th>
+            <th>Classe</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr th:each="etudiant : ${etudiants}">
+            <td th:text="${etudiant.personne.nom}">Nom de l'étudiant</td>
+            <td th:text="${etudiant.personne.prenom}">Prénom de l'étudiant</td>
+            <td th:text="${etudiant.personne.dateNaissance}">Date de naissance de l'étudiant</td>
+            <td th:text="${etudiant.moyenne}">Moyenne de l'étudiant</td>
+            <td th:text="${etudiant.classe.nom}">Classe de l'étudiant</td>
+            <td>
+                <form th:action="@{'/etudiant/supprimer/' + ${etudiant.etudiantId}}" method="post">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

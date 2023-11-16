@@ -9,6 +9,8 @@ import tn.spring.springboot.classe.Personne;
 public class Etudiant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
+    @Setter
     private Long etudiantId;
 
     @Getter
@@ -19,8 +21,11 @@ public class Etudiant {
     @Getter
     @Embedded
     private Personne personne;
+
+    @Setter
+    @Getter
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "classe_id", nullable = false)
+    @JoinColumn(name = "classe_id", nullable = true)
     private Classe classe;
     public Etudiant(){}
 

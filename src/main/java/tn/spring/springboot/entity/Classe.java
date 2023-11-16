@@ -10,10 +10,14 @@ import java.util.List;
 public class Classe {
     @Id
     @GeneratedValue
+    @Getter
+    @Setter
     private Long classeId;
+
     @Getter
     @Setter
     private String nom;
+
     @Getter
     @Setter
     @OneToMany(mappedBy = "classe")
@@ -23,6 +27,7 @@ public class Classe {
     @Getter
     @Setter
     private Professeur professeur;
+
 
 
 }

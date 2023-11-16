@@ -1,18 +1,39 @@
 package tn.spring.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import tn.spring.springboot.entity.Etudiant;
+import tn.spring.springboot.entity.Classe;
 
 import tn.spring.springboot.entity.Professeur;
+import tn.spring.springboot.service.ClasseService;
 import tn.spring.springboot.service.ProfesseurService;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class ProfesseurController {
     @Autowired
     private ProfesseurService professeurService;
+
+    @Autowired
+    private ClasseService classeService;
+
+    @PostMapping("/professeur/ajouter")
+    public String ajouterProfesseur(@ModelAttribute Professeur professeur, @RequestParam("classeId") Long classeId) {
+        Classe classe = classeService.getClasseById(classeId);
+        if (classe != null) {
+            professeur.setClasse(classe);
+        }
+        professeurService.saveProfesseur(professeur);
+        return "redirect:/";
+    }
+
+    @PostMapping("/professeur/supprimer/{profId}")
+    public String deleteEtudiant(@PathVariable("profId") Long profId) {
+        professeurService.deleteProfesseurById(profId);
+        return "redirect:/";
+    }
 
     @PostMapping("/prof")
     public Professeur saveProf(@RequestBody Professeur prof) {

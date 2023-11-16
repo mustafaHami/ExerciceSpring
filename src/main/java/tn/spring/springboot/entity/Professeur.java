@@ -8,6 +8,8 @@ import tn.spring.springboot.classe.Personne;
 public class Professeur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
+    @Setter
     private Long profId;
 
     @Getter
@@ -18,6 +20,9 @@ public class Professeur {
     @Getter
     @Embedded
     private Personne personne;
+
+    @Setter
+    @Getter
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;
