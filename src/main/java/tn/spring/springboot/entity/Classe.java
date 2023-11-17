@@ -7,25 +7,19 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Classe {
     @Id
     @GeneratedValue
-    @Getter
-    @Setter
     private Long classeId;
 
-    @Getter
-    @Setter
     private String nom;
 
-    @Getter
-    @Setter
     @OneToMany(mappedBy = "classe",cascade = CascadeType.ALL)
     private List<Etudiant> etudiants;
 
     @OneToOne(mappedBy = "classe",cascade = CascadeType.ALL)
-    @Getter
-    @Setter
     private Professeur professeur;
 
 

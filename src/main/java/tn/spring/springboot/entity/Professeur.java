@@ -5,24 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 import tn.spring.springboot.classe.Personne;
 @Entity
+@Getter
+@Setter
 public class Professeur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Setter
     private Long profId;
 
-    @Getter
-    @Setter
     private String matiere;
 
-    @Setter
-    @Getter
     @Embedded
     private Personne personne;
 
-    @Setter
-    @Getter
     @OneToOne
     @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;

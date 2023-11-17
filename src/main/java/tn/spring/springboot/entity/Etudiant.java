@@ -11,8 +11,6 @@ import tn.spring.springboot.classe.Personne;
 public class Etudiant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Setter
     private Long etudiantId;
 
     private int moyenne;
@@ -20,8 +18,6 @@ public class Etudiant {
     @Embedded
     private Personne personne;
 
-    @Setter
-    @Getter
     @ManyToOne
     @JoinColumn(name = "classe_id", nullable = true)
     private Classe classe;

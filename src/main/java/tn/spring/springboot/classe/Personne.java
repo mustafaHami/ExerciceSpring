@@ -1,9 +1,14 @@
 package tn.spring.springboot.classe;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+@Getter
+@Setter
 public class Personne {
     private String nom;
     private String prenom;
@@ -17,30 +22,6 @@ public class Personne {
     }
 
     public Personne() {
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getDateNaissance() {
-        return dateNaissance;
-    }
-
-    public void setDateNaissance(String dateNaissance) {
-        this.dateNaissance = dateNaissance;
     }
 
     public boolean minimum4Carac(String value) {
