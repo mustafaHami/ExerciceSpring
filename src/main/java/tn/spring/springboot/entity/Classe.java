@@ -2,6 +2,7 @@ package tn.spring.springboot.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Classe {
     @Id
     @GeneratedValue
@@ -21,7 +23,6 @@ public class Classe {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Professeur professeur;
-
 
 
 }

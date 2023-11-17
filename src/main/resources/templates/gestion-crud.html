@@ -34,7 +34,7 @@
         <h2>Classes</h2>
         <form action="/classe/ajouter" method="post">
             <!-- Les champs du formulaire pour un étudiant -->
-            <input type="text" name="nom" placeholder="Nom">
+            <input type="text" name="nom" placeholder="Nom" required>
             <!-- Ajoutez d'autres champs selon votre entité Etudiant -->
             <button type="submit">Ajouter Classe</button>
         </form>
@@ -43,10 +43,10 @@
     <div class="section">
         <h2>Professeurs</h2>
         <form action="/professeur/ajouter" method="post">
-            <input type="text" name="personne.nom" placeholder="Nom">
-            <input type="text" name="personne.prenom" placeholder="Prénom">
-            <input type="text" name="personne.dateNaissance" placeholder="dateNaissance">
-            <input type="text" name="matiere" placeholder="matiere">
+            <input type="text" name="personne.nom" placeholder="Nom" minlength="4" required>
+            <input type="text" name="personne.prenom" placeholder="Prénom" minlength="4" required>
+            <input type="date" name="personne.dateNaissance" placeholder="date de Naissance" required>
+            <input type="text" name="matiere" placeholder="matiere" required>
             <select name="classeId">
                 <option th:each="classe : ${classes}" th:value="${classe.classeId}">[[${classe.nom}]]</option>
             </select>
@@ -57,10 +57,10 @@
     <div class="section">
         <h2>Étudiants</h2>
         <form action="/etudiant/ajouter" method="post">
-            <input type="text" name="personne.nom" placeholder="Nom">
-            <input type="text" name="personne.prenom" placeholder="Prénom">
-            <input type="text" name="personne.dateNaissance" placeholder="dateNaissance">
-            <input type="text" name="moyenne" placeholder="moyenne">
+            <input type="text" name="personne.nom" placeholder="Nom" minlength="4" required>
+            <input type="text" name="personne.prenom" placeholder="Prénom" minlength="4" required>
+            <input type="date" name="personne.dateNaissance" placeholder="date de Naissance" required>
+            <input type="text" name="moyenne" placeholder="moyenne" pattern="[0-9]{2,}" required>
             <select name="classeId">
                 <option th:each="classe : ${classes}" th:value="${classe.classeId}">[[${classe.nom}]]</option>
             </select>
@@ -81,7 +81,7 @@
             <th>Date de naissance</th>
             <th>Matière</th>
             <th>Classe</th>
-            <th>&nbsp;</th>
+            <th>Action</th>
         </tr>
         <tr th:each="professeur : ${professeurs}">
             <td th:text="${professeur.personne.nom}">Nom du professeur</td>
@@ -105,7 +105,8 @@
             <th>Date de naissance</th>
             <th>Moyenne</th>
             <th>Classe</th>
-            <th>&nbsp;</th>
+            <th>Admission</th>
+            <th>Action</th>
         </tr>
         <tr th:each="etudiant : ${etudiants}">
             <td th:text="${etudiant.personne.nom}">Nom de l'étudiant</td>
@@ -113,6 +114,7 @@
             <td th:text="${etudiant.personne.dateNaissance}">Date de naissance de l'étudiant</td>
             <td th:text="${etudiant.moyenne}">Moyenne de l'étudiant</td>
             <td th:text="${etudiant.classe.nom}">Classe de l'étudiant</td>
+            <td th:text="${etudiant.moyenne >= 14 ? 'Admission' : 'Rattrapage'}">Admission</td>
             <td>
                 <form th:action="@{'/etudiant/supprimer/' + ${etudiant.etudiantId}}" method="post">
                     <input type="hidden" name="_method" value="delete" />

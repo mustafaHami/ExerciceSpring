@@ -2,11 +2,13 @@ package tn.spring.springboot.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tn.spring.springboot.classe.Personne;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Professeur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,5 +23,4 @@ public class Professeur {
     @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;
 
-    public Professeur(){}
 }

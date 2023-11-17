@@ -6,13 +6,13 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Getter
 @Setter
 public class Personne {
     private String nom;
     private String prenom;
-
     private String dateNaissance;
 
     public Personne(String nom, String prenom, String dateNaissance) {
@@ -24,9 +24,6 @@ public class Personne {
     public Personne() {
     }
 
-    public boolean minimum4Carac(String value) {
-        return value.length() < 4;
-    }
     public boolean age20 (String dateString) {
         LocalDate dateNow = LocalDate.now();
         LocalDate dateParse = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -34,12 +31,4 @@ public class Personne {
         return age > 20;
     }
 
-    @Override
-    public String toString() {
-        return "Personne{" +
-                "nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", dateNaissance='" + dateNaissance + '\'' +
-                '}';
-    }
 }
