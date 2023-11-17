@@ -19,7 +19,7 @@ public class Classe {
     @OneToMany(mappedBy = "classe",cascade = CascadeType.ALL)
     private List<Etudiant> etudiants;
 
-    @OneToOne(mappedBy = "classe",cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Professeur professeur;
 
 

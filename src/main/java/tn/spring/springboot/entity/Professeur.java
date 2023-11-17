@@ -17,8 +17,9 @@ public class Professeur {
     @Embedded
     private Personne personne;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;
+
     public Professeur(){}
 }
