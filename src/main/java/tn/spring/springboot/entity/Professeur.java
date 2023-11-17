@@ -23,7 +23,7 @@ public class Professeur {
 
     @Setter
     @Getter
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "classe_id", nullable = false)
     private Classe classe;
     public Professeur(){}

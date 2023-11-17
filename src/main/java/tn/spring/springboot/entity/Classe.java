@@ -20,10 +20,10 @@ public class Classe {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "classe")
+    @OneToMany(mappedBy = "classe",cascade = CascadeType.ALL)
     private List<Etudiant> etudiants;
 
-    @OneToOne(mappedBy = "classe")
+    @OneToOne(mappedBy = "classe",cascade = CascadeType.ALL)
     @Getter
     @Setter
     private Professeur professeur;

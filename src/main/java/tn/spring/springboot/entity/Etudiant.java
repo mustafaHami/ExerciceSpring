@@ -6,6 +6,8 @@ import lombok.Setter;
 import tn.spring.springboot.classe.Personne;
 
 @Entity
+@Getter
+@Setter
 public class Etudiant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,18 +15,14 @@ public class Etudiant {
     @Setter
     private Long etudiantId;
 
-    @Getter
-    @Setter
     private int moyenne;
 
-    @Setter
-    @Getter
     @Embedded
     private Personne personne;
 
     @Setter
     @Getter
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "classe_id", nullable = true)
     private Classe classe;
     public Etudiant(){}
